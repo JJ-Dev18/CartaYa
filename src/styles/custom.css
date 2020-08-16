@@ -1,0 +1,109 @@
+/* @font-face {
+    font-family: "tiza";
+    src: url("/assets/tiza.ttf");
+  }
+  @font-face {
+    font-family: "tiza2";
+    src: url("/assets/tiza2.ttf"); */
+  /* }  */
+  @font-face {
+    font-family: "tiza";
+    src: url("/assets/tiza3.ttf");
+  }
+
+.content__custom{
+    
+    font-family: tiza;
+    display: flex;
+    height: 100%;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+    flex-direction: column;
+    background:url('/assets/backgroundPc.jpg') ;
+    background-size: cover;
+    background-position: center;
+    transition: 1.5s background-position ease;
+}
+.title__custom{
+    font-size: 65px;
+    margin: 30px 0 ;
+    color: white;
+}
+input[type="file"] {
+    color: yellowgreen;
+}
+
+.form__custom{
+    display: flex;
+    flex-direction: column;
+    /* text-align: left; */
+    align-items: center;
+    justify-content: flex-start;
+    width: 75%;
+    height: 90%;
+    border: 1px solid #555;
+    border-radius: 20px;
+}
+.caja__color {
+    width: 90%;
+    height: 100px;
+    margin-bottom: 20px;
+}
+.text__input{
+    font-size: 40px;
+    margin: 0;
+    padding-top: 15px;
+    text-align: left;
+    width: 100%;
+    color: white;
+}
+.content__logo{
+    margin-left: 20px;
+}
+.content__logo input{
+    content: 'Escoger logo';
+}
+.content__input input{
+    margin-left: 10px;
+    cursor: pointer;
+    width: 100px;
+    height: 50px;
+    box-sizing: border-box;
+}
+.content__input{
+    display: inline-flex;
+    margin-top: 20px;
+    width: 100%;
+    padding: 0 10px;
+    
+}
+.content__input .input__empresa{
+    width: 200px ;
+    padding:10px;
+}
+.btn-logout:hover{
+
+    color: #666;
+    text-decoration: underline;
+    background-color: yellowgreen;
+}
+.logo{
+    width: 80px;
+    height: 80px;
+}
+
+@media screen and ( min-width: 768px){
+
+    .content__custom{
+        
+        background: url('/assets/custom1.jpg');
+        background-size: cover;
+        background-position: left;
+    }
+    .form__custom{
+        width: 60%;
+    }
+    
+}

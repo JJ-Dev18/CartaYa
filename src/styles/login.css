@@ -1,0 +1,115 @@
+.name__carta{
+    color: white;
+    font-size: 40px;
+    font-family: tiza;
+    transition: 1s all ease;
+    position: relative;
+    top: -6%;
+    margin: 0;
+    padding: 0;
+   
+}
+.link__registro{
+    /* position: relative;
+    top: -10px; */
+    text-align: center;
+}
+.text__registro{
+     
+    color: rgb(72,111, 189);
+    margin-top: 10px;
+    text-decoration: none;
+    font-size: 18px;
+    
+}
+.text__registro:hover{
+    text-decoration: underline;
+}
+.content__form-login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    flex-direction: column;
+    background:url('/assets/backgroundPc.jpg') ;
+    /* background-color: ¿¿; */
+    background-size: cover;
+    background-position: -25em;
+    transition: 1.5s background-position ease;
+}
+.form__login{
+    display: flex;
+    flex-direction: column;
+    align-items : center;
+    height: 400px;
+    justify-content: center;
+    border-radius: 10px;
+    
+     
+}
+#my-helper-text{
+    color: white;
+}
+.auth__input{
+    width: 300px;
+    padding: 10px;
+    margin: 10px;
+    font-family: tiza;
+    font-size: 20px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    background-color: white;
+    border: 1px solid gray;
+    height: 50px;
+}
+
+.auth__input:focus{
+  background-color: transparent !important; 
+  color: white !important; 
+}
+.auth__input::selection{
+   
+    background-color: #dc004e;
+}
+.btn{
+   font-family: tiza !important;
+   font-size: 18px !important;
+   margin-top: 10px;
+   width: 300px;
+}
+
+
+
+@media screen and (min-width: 500px){
+    .content__form-login{
+        background-position: -20em;
+    }
+}
+
+@media screen and (min-width: 768px){
+    .content__form-login{
+        background-position: -13.5em;
+    }
+}
+@media screen and (min-width : 992px){
+
+     .name__carta{
+         font-size: 50px;
+     }
+     .btn{
+         font-size: 30px;
+     }
+    .form__login{
+        position: relative;
+        left: -45px;
+        border: none;
+    }
+    .content__form-login{
+       
+        background-size: cover;
+        background-position: center;
+      
+        
+    }
+}

@@ -1,0 +1,28 @@
+
+
+body{
+    font-family: tiza;
+ 
+}
+
+@media screen and (min-width: 500px){
+    body{
+        background-position: -20em;
+    }
+}
+@media screen and (min-width: 768px){
+    body{
+        background-position: -13.5em;
+    }
+}
+@media screen and (min-width : 992px){
+
+    body{
+       
+        background-size: cover;
+        background-position: center;
+      
+        
+    }
+    
+}

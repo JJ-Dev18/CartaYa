@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+
 import * as serviceWorker from './serviceWorker';
+import { CartaYa } from './CartaYa';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+ 
+    <CartaYa />,
+  
   document.getElementById('root')
 );
 
