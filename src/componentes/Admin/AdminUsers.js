@@ -121,6 +121,9 @@ export const AdminUsers = () => {
           <Typography variant="h6" noWrap>
             Administrador
           </Typography>
+          <Typography variant="h6" noWrap>
+            Logout
+          </Typography>
         </Toolbar>
       </AppBar>
       <Drawer
