@@ -15,8 +15,8 @@ export const PrivateAdminRouter = ({
         <Route { ...rest }
          component={ (props) => (
             (isAdmin)
-            ? (console.log('siadmmin'))
-            : (<Redirect to ="/" />)
+            ? (<Component {...props} />)
+            : (<Redirect to ="/admin" />)
         )}
         />
     )

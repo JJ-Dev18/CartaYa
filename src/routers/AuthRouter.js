@@ -9,6 +9,7 @@ import {
   } from "react-router-dom";
 import { Login } from '../componentes/Login';
 import { Register } from '../componentes/Register';
+import {LoginAdmin} from '../componentes/Admin/LoginAdmin'
 
 
 export const AuthRouter = () => {
@@ -18,6 +19,7 @@ export const AuthRouter = () => {
             <Switch>
             <Route  path="/auth/login" component={ Login} />
             <Route  path="/auth/register" component={ Register} />
+            {/* <Route path ="/auth/admin" component={LoginAdmin} /> */}
 
             <Redirect to ="/auth/login" />
             </Switch>

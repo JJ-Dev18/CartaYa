@@ -1,36 +1,44 @@
 import React  from 'react'
-import {useDispatch} from 'react-redux'
+import {useDispatch,useSelector} from 'react-redux'
 import { Link } from 'react-router-dom'
 import { useForm } from '../hooks/useForm'
-import { login, loginAdmin } from '../actions/auth'
+import { login, setError } from '../actions/auth'
 import {Button} from '@material-ui/core/'
 import '../styles/login.css'
+
+import Alert from '@material-ui/lab/Alert';
+import { getUser } from '../helpers/getUser'
 
 export const Login = () => {
 
     const dispatch = useDispatch();
-    
+    const {error,msgError} = useSelector( state => state.auth );
     const [formValue,handleInputChange] = useForm({
 
-        email:'admin',
-        password:'1234'
+        user:'admin',
+        password:'123456'
     })
     
+    const{user,password} = formValue;
+  
+   
 
     const handleLogin = (e) => {
         e.preventDefault();
-        if(email==='admin' && password === '1234'){
-            dispatch(loginAdmin(email,password))
-        }
-        else{
-            dispatch(login(email,password))
-        }
+        getUser(user,password).then(tok => {
+            if(tok){
+                dispatch(login(user,password))
+            }else{
+                dispatch(setError('Usuario o contraseña incorrecta'))
+            }
+           
+        })
+       
 
         
         
     }
 
-    const{email,password} = formValue;
    
     return (
         <div className="content__form-login">
@@ -40,8 +48,8 @@ export const Login = () => {
                     
                     <input type="text"
                         placeholder="Email"
-                        name="email"
-                        value={email}
+                        name="user"
+                        value={user}
                         className="auth__input"
                         onChange={handleInputChange} 
                         id="id__email"
@@ -54,6 +62,8 @@ export const Login = () => {
                         onChange={handleInputChange} 
                         />
                     <Button className="btn" type="submit" variant="contained" color="secondary" size="large" > Login</Button>
+                    { (error) && <Alert severity="error">{msgError}</Alert>} 
+                   <Link className="text__registro" to="/admin"> Admin </Link>
                     
                      <Link className="text__registro" to="/auth/register">
                          Registrarse</Link>

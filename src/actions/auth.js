@@ -11,6 +11,11 @@ export const login = (user,password ) => ({
     }
 
 })
+export const loggout = () =>( {
+
+    type : types.loggout
+
+})
 
 export const loginAdmin = (user,password) =>( {
 
@@ -21,8 +26,26 @@ export const loginAdmin = (user,password) =>( {
     }
 })
 
-export const loggout = () =>( {
-
-    type : types.loggout
-
+export const logoutAdmint = () =>( {
+    type: types.logoutAdmint,
+    
 })
+
+export const setError = (msgError) => ({
+
+    type: types.LogSetError,
+    payload : msgError
+    
+   
+    
+})
+
+export const setErrorAdmin = (msgError) => ({
+
+    type: types.LogSetErrorAdmin,
+    payload : msgError
+    
+   
+    
+})
+

@@ -8,7 +8,7 @@ import {
     
   } from "react-router-dom";
 
-import { PrincipalAdmin } from '../componentes/Admin/PrincipalAdmin';
+import { PrincipalAdmin } from '../componentes/Admin/LoginAdmin';
 import { AdminUsers } from '../componentes/Admin/AdminUsers';
 
 
@@ -18,10 +18,10 @@ export const AdminRouter = () => {
         <div className="auth__main">
             <div className="auth__box-container">
             <Switch>
-            <Route exact path="/admin/principal" component={PrincipalAdmin} />
-            <Route exact path="/admin/users" component={AdminUsers} />
+            
+            <Route exact path="/" component={AdminUsers} />
 
-            <Redirect to ="/admin/principal" />
+            <Redirect to ="/auth/admin" />
             </Switch>
             </div>
         
