@@ -26,8 +26,8 @@ export const loginAdmin = (user,password) =>( {
     }
 })
 
-export const logoutAdmint = () =>( {
-    type: types.logoutAdmint,
+export const logoutAdmin= () =>( {
+    type: types.logoutAdmin
     
 })
 

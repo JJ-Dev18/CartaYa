@@ -25,9 +25,9 @@ export const authReducer = (state = { logged: false, admin: false }, action) => 
             }
         case types.logoutAdmin:
             return {
-
+                ...action.payload,
+                logged: false ,
                 admin: false,
-                logged: false
             }
         case types.LogSetError:
             return {

@@ -1,23 +1,28 @@
 import {useState, useEffect} from 'react'
-import { getUser } from '../helpers/getUser'
+import { getUser } from '../helpers/getGifs';
 
-export const useFetchUser = ( user, password) => {
-
-    const [state, setState] = useState({
-        token : '',
-        logged : false 
-    })
-
+export const useFetchGifs = (user,password) => {
    
-        getUser(user,password).then(tok => {
+    const [state, setState] = useState({
+        data : [],
+        loading: true
+    });
+    useEffect(() => {
 
-            setState({
-                token: tok,
-                logged: true 
-            })
-        })
+        getUser(user,password).then(token => {
+       
+          
+               
+                setState({
+                    data : token,
+                    loading: false
+                })
+           
+        });
+
+    },[category])
+
     
 
-
-    return state
+    return state;
 }

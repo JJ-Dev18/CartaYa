@@ -7,6 +7,8 @@ import {useDispatch,useSelector} from 'react-redux'
 import {Link} from 'react-router-dom'
 import Alert from '@material-ui/lab/Alert';
 import { getUser } from '../../helpers/getUser'
+import { getData } from '../../helpers/getData'
+
 
 
 
@@ -31,7 +33,9 @@ export const LoginAdmin = (({history}) => {
                 
                 dispatch(setErrorAdmin('Usuario o contraseña incorrecta'))
             }
-        })
+        }).catch(e => console.log(e.message))
+
+        
         
     }
     
@@ -41,8 +45,9 @@ export const LoginAdmin = (({history}) => {
                 <form className="form__login-admin" noValidate autoComplete="off" onSubmit={handleLogin}>
                     <h1 className="text__login">LOGIN</h1>
                      { (errorAdmin) && <Alert severity="error">{msgErrorAdmin}</Alert>} 
-                    <TextField id="standard-basic" label="Usuario" value={user} name="user" onChange={handleInputChange}/>
-                    <TextField id="filled-basic" label="Contraseña" value={password} name="password" onChange={handleInputChange}/>
+                    <TextField id="standard-basic" label="Usuario" value={user} name="user" onChange={handleInputChange}
+                    />
+                    <TextField id="filled-basic" label="Contraseña" value={password} name="password" onChange={handleInputChange} type="password"/>
                     <Button variant="contained" color="secondary" type="onSubmit" className="btn__login" >Login</Button>
                 
                     <Link className="text__registro" to="/auth"> User </Link>   

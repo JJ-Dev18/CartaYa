@@ -32,7 +32,7 @@ export const Login = () => {
                 dispatch(setError('Usuario o contraseña incorrecta'))
             }
            
-        })
+        }).catch(e => console.log(e.message))
        
 
         

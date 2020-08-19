@@ -12,6 +12,10 @@ export const types ={
      LogSetError : '[User] Set Error',
      LogRemoveError : '[User] Remove Error',
      LogSetErrorAdmin :'[Admin] Set Error',
+     //Users
+     UserAdd : '[User] Add',
+     UserDelete : '[User] Delete',
+     UserEdit : '[User] Edit',
      //custom
      colores : '[CM] colorP',
      colorS : '[CM] colorS',

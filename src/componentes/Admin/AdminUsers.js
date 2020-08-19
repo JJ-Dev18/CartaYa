@@ -1,7 +1,12 @@
-import React from 'react';
+import React,{useState} from 'react';
 import clsx from 'clsx';
-import { useTheme,makeStyles } from '@material-ui/core/styles';
-import {Drawer,AppBar,Toolbar,List,CssBaseline,Typography} from '@material-ui/core'
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import Drawer from '@material-ui/core/Drawer';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import List from '@material-ui/core/List';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -13,14 +18,25 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import PeopleIcon from '@material-ui/icons/People'
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import { logoutAdmin } from '../../actions/auth';
+import {useDispatch} from 'react-redux'
 
+import {Button} from '@material-ui/core'
+import '../../styles/user.css'
+import addUser from './AddUser';
+import AddUser from './AddUser';
+import ListUser from './ListUser';
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
   },
   appBar: {
+    
     zIndex: theme.zIndex.drawer + 1,
+    justifyContent: 'space_around',
     backgroundColor: '#999',
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
@@ -79,10 +95,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 export const AdminUsers = () => {
 
- 
+  const dispatch = useDispatch();
   const classes = useStyles();
 
   const theme = useTheme();
+  const [showUser, setShowUser] = useState(false)
+  const [showAdd, setShowAdd] = useState(false)
   const [open, setOpen] = React.useState(false);
 
   const handleDrawerOpen = () => {
@@ -92,8 +110,22 @@ export const AdminUsers = () => {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  
+  const handleLogout = (e) => {
 
+     dispatch(logoutAdmin())
+     console.log('deslogueado admin')
+  }
+  
+  const handleUsuarios = (e) => {
+    
+    setShowUser(!showUser)
+    setShowAdd(false)
+     
+  }
+  const handleAddUser = (e) => {
+     setShowUser(false)
+     setShowAdd(true)
+  }
 
   return (
 
@@ -121,9 +153,7 @@ export const AdminUsers = () => {
           <Typography variant="h6" noWrap>
             Administrador
           </Typography>
-          <Typography variant="h6" noWrap>
-            Logout
-          </Typography>
+          <div onClick={handleLogout} className="logout"><ExitToAppIcon/> Log out </div>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -147,47 +177,32 @@ export const AdminUsers = () => {
         <Divider />
         <List>
           {['Usuarios', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem button key={text}>
+            <ListItem button key={text} onClick={handleUsuarios}>
               <ListItemIcon>{index % 2 === 0 ? <PeopleIcon /> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}
         </List>
-        <Divider />
-        <List>
-          {['Usuarios', 'Trash', 'Spam'].map((text, index) => (
+         <Divider />
+         <List>
+          {['All mail', 'Trash', 'Spam'].map((text, index) => (
             <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <PeopleIcon /> : <MailIcon />}</ListItemIcon>
+              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}
         </List>
+        
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <Typography paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-          ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum
-          facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
-          gravida rutrum quisque non tellus. Convallis convallis tellus id interdum velit laoreet id
-          donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-          adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras.
-          Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo quis
-          imperdiet massa tincidunt. Cras tincidunt lobortis feugiat vivamus at augue. At augue eget
-          arcu dictum varius duis at consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem
-          donec massa sapien faucibus et molestie ac.
-        </Typography>
-        <Typography paragraph>
-          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper eget nulla
-          facilisi etiam dignissim diam. Pulvinar elementum integer enim neque volutpat ac
-          tincidunt. Ornare suspendisse sed nisi lacus sed viverra tellus. Purus sit amet volutpat
-          consequat mauris. Elementum eu facilisis sed odio morbi. Euismod lacinia at quis risus sed
-          vulputate odio. Morbi tincidunt ornare massa eget egestas purus viverra accumsan in. In
-          hendrerit gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem et
-          tortor. Habitant morbi tristique senectus et. Adipiscing elit duis tristique sollicitudin
-          nibh sit. Ornare aenean euismod elementum nisi quis eleifend. Commodo viverra maecenas
-          accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam ultrices sagittis orci a.
-        </Typography>
+        {
+          (showUser) && <div><h1>Usuarios <Button onClick={handleAddUser} variant="contained" endIcon={<PersonAddIcon/>}>Agregar</Button></h1>  <ListUser/></div> 
+        }
+        {
+          (showAdd) && <AddUser />
+        }
+        
       </main>
     </div>
 
