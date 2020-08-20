@@ -12,7 +12,7 @@ export const PublicRouter = ({
         component={ (props) => (
             (!isLoggedIn)
             ? (<Component {...props} />)
-            : (<Redirect to ="/custom" />)
+            : (<Redirect to ="/" />)
         )}
         />
     )

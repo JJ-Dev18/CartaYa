@@ -20,7 +20,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import PeopleIcon from '@material-ui/icons/People'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
-import { logoutAdmin } from '../../actions/auth';
+import { loggout } from '../../actions/auth';
 import {useDispatch} from 'react-redux'
 
 import {Button} from '@material-ui/core'
@@ -93,7 +93,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
   },
 }));
-export const AdminUsers = () => {
+export const AdminUsers = ({history}) => {
 
   const dispatch = useDispatch();
   const classes = useStyles();
@@ -112,7 +112,8 @@ export const AdminUsers = () => {
   };
   const handleLogout = (e) => {
 
-     dispatch(logoutAdmin())
+     dispatch(loggout())
+     history.push('/auth')
      console.log('deslogueado admin')
   }
   

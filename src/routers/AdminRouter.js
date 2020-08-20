@@ -1,31 +1,32 @@
 import React from 'react'
+import PropTypes from 'prop-types';
+import { Route, Redirect } from 'react-router-dom'
 
-import {
-   
-    Switch,
-    Route,
-    Redirect,
+export const AdminRouter = ({
+    isAdmin,
+    component : Component ,
+    ...rest
+}) => {
+
     
-  } from "react-router-dom";
-
-import { PrincipalAdmin } from '../componentes/Admin/LoginAdmin';
-import { AdminUsers } from '../componentes/Admin/AdminUsers';
-
-
-
-export const AdminRouter = () => {
+    localStorage.setItem('lastPath', rest.location.pathname)
+ 
     return (
-        <div className="auth__main">
-            <div className="auth__box-container">
-            <Switch>
-            
-            <Route exact path="/" component={AdminUsers} />
-
-            <Redirect to ="/auth/admin" />
-            </Switch>
-            </div>
-        
-        </div>
-        
+        <Route { ...rest }
+        component={ (props) => (
+            (!!isAdmin)
+            ? (<Component {...props} />)
+            : (<Redirect to ="/login" />)
+        )}
+        />
     )
+        
+}  
+
+
+AdminRouter.propTypes = {
+
+    isAdmin : PropTypes.bool.isRequired,
+    component : PropTypes.func.isRequired
+
 }

@@ -2,14 +2,14 @@ import React  from 'react'
 import {useDispatch,useSelector} from 'react-redux'
 import { Link } from 'react-router-dom'
 import { useForm } from '../hooks/useForm'
-import { login, setError } from '../actions/auth'
+import { login, setError, loginAdmin } from '../actions/auth'
 import {Button} from '@material-ui/core/'
 import '../styles/login.css'
 
 import Alert from '@material-ui/lab/Alert';
 import { getUser } from '../helpers/getUser'
 
-export const Login = () => {
+export const Login = ({history}) => {
 
     const dispatch = useDispatch();
     const {error,msgError} = useSelector( state => state.auth );
@@ -25,17 +25,34 @@ export const Login = () => {
 
     const handleLogin = (e) => {
         e.preventDefault();
-        getUser(user,password).then(tok => {
-            if(tok){
+        getUser(user,password).then(resp => {
+            //si hay toquen es por que esta registrado 
+            if(resp.token ){
+ 
+                let level = resp.level+'';
+                localStorage.setItem('token', resp.token)
+               if(resp.level === 0){
+                dispatch(loginAdmin(user,password,level))
+                history.push("/admin") 
+               }  
+               else{
+                history.push("/custom")
                 dispatch(login(user,password))
-            }else{
-                dispatch(setError('Usuario o contraseña incorrecta'))
-            }
-           
-        }).catch(e => console.log(e.message))
-       
+                 
+               }
+                //si el valor del level es 0 es admin si es 1 es user 
+            // (resp.level === 1) ? history.push("/custom")   : history.push("/admin")
+            // (resp.level === 1) ? dispatch(login(user,password))  : dispatch(loginAdmin(user,password,level))
 
-        
+            //  dispatch(login(user,password,level)                    
+            } 
+            else{
+                
+                dispatch(setError('Usuario o contraseña incorrecta'))
+            }  
+                       
+        } 
+        ).catch(e => console.log(e.message))    
         
     }
 

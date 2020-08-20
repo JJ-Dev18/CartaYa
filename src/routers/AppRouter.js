@@ -1,58 +1,71 @@
+import React , {useEffect, useState}from 'react'
 import {
-  BrowserRouter as Router,
-  Switch,
-  Redirect
-} from "react-router-dom";
-import { useSelector} from 'react-redux'
-import React ,{useEffect} from 'react';
-import { Custom } from "../componentes/Custom";
-import {PublicRouter} from './PublicRoute'
-import {PrivateRouter }from './PrivateRoute'
-import {PrivateAdminRouter} from './admin/PrivateAdminRouter'
-import {AuthRouter} from './AuthRouter'
-import { Menu } from "../componentes/Menu";
-import { DrapandDrop } from "../componentes/DrapandDrop";
-import {AdminRouter} from './AdminRouter'
-import { PublicRouterAdmin } from "./admin/PublicRouterAdmin";
-import { LoginAdmin } from "../componentes/Admin/LoginAdmin";
-
-
-
-
-export default function AppRouter() {
+    BrowserRouter as Router,
+    Switch,
+    Redirect
+    
+  } from "react-router-dom";
  
-  
-  const {logged,admin} = useSelector( state => state.auth );
-  console.log(logged,admin)
+  import {useDispatch,useSelector} from 'react-redux'
+import { AuthRouter } from './AuthRouter';
 
+import { PrivateRouter } from './PrivateRoute';
+import { PublicRouter } from './PublicRoute';
+
+import { AdminUsers } from '../componentes/Admin/AdminUsers';
+import { Custom } from '../componentes/Custom';
+import { AdminRouter } from './AdminRouter';
   
-  
-  return (
-   
-      
-        <Router>
+
+export  const AppRouter = () => {
+    
+    const dispatch = useDispatch();
+    
+    const {logged,rol} = useSelector( state => state.auth );
+    console.log(!!rol)
+
+     const [checking, setChecking] = useState(true)
+     const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+    // useEffect(() => {
+    //     firebase.auth().onAuthStateChanged( (user) => {
+
+    //         if(user?.uid){
+    //             dispatch(login(user.uid,user.displayName))
+    //             setIsLoggedIn(true)
+    //             loadNotes(user.uid)
+    //         }
+    //         else{
+    //             setIsLoggedIn(false)
+    //         }
+
+    //         setChecking(false)
+            
+    //     })
+    // }, [dispatch,setChecking,setIsLoggedIn])      
+
+    // if (checking){
+    //    return <h1> Wait...</h1>
+    // }
+
+    return (
+    <Router>
         <div>
-      
+
             <Switch>
-               
-               
-                {/* <PrivateAdminRouter isAdmin={admin}  path="/admin" component={AdminRouter} /> */}
-                <PublicRouter isLoggedIn={logged}  path="/auth" component={ AuthRouter}/>
+                <AdminRouter isAdmin={!!rol}  path="/admin" component={ AdminUsers} />
+                <PublicRouter isLoggedIn={logged} path="/auth" component={ AuthRouter}/>
+                <PrivateRouter isLoggedIn={logged} exact path="/" component={ Custom} />
                 
-                <PrivateAdminRouter isAdmin={admin} exact path="/" component={AdminRouter} />
-                <PublicRouterAdmin isAdmin={admin} path= "/admin" component={LoginAdmin} />
                 
-                <PrivateRouter isLoggedIn={logged}  path ="/custom/menu" component={Menu}/>
-                {/* <PrivateRouter isLoggedIn={logged}  path="/drap" component={DrapandDrop} /> */}
-                <PrivateRouter isLoggedIn={logged}  exact path="/custom" component={Custom} />
                 
-                 
                 <Redirect to ="/auth/login" />
              </Switch>
 
         </div>
          
     </Router>
-     
-  );
+    )
 }
+
+export default AppRouter;

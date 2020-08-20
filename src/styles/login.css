@@ -34,9 +34,10 @@
     height: 100vh;
     flex-direction: column;
     background:url('/assets/backgroundPc.jpg') ;
+    /* background-repeat: no-repeat; */
     /* background-color: ¿¿; */
     background-size: cover;
-    background-position: -25em;
+    background-position: -35em ;
     transition: 1.5s background-position ease;
 }
 .form__login{
@@ -84,13 +85,13 @@
 
 @media screen and (min-width: 500px){
     .content__form-login{
-        background-position: -20em;
+        background-position: -28em ;
     }
 }
 
 @media screen and (min-width: 768px){
     .content__form-login{
-        background-position: -13.5em;
+        background-position: -13.5em !important;
     }
 }
 @media screen and (min-width : 992px){
@@ -103,13 +104,13 @@
      }
     .form__login{
         position: relative;
-        left: -45px;
+        left: -45px !important;
         border: none;
     }
     .content__form-login{
        
         background-size: cover;
-        background-position: center;
+        background-position: center !important;
       
         
     }

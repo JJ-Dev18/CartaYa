@@ -7,7 +7,8 @@ export const login = (user,password ) => ({
     type: types.login,
     payload : {
         user:user,
-        password: password
+        password: password,
+        
     }
 
 })
@@ -17,12 +18,13 @@ export const loggout = () =>( {
 
 })
 
-export const loginAdmin = (user,password) =>( {
+export const loginAdmin = (user,password,rol) =>( {
 
     type: types.loginAdmin,
     payload : {
         adminN: user,
-        password : password 
+        password : password ,
+        rol: rol,
     }
 })
 
