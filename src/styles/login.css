@@ -65,6 +65,9 @@
     border: 1px solid gray;
     height: 50px;
 }
+.auth__input:invalid:required{
+    border: 5px solid #999;    
+}
 
 .auth__input:focus{
   background-color: transparent !important; 

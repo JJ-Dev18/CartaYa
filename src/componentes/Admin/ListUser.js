@@ -7,16 +7,14 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { useFetch } from '../../hooks/useFetch';
 import {Button} from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import VisibilityIcon from '@material-ui/icons/Visibility';
-import AddUser from './AddUser';
 import {useDispatch} from 'react-redux'
-import { addUsers } from '../../actions/users';
+import {  viewUser } from '../../actions/users';
+import { useFetchUser } from '../../hooks/useFetchUser';
 
 
 
@@ -48,19 +46,26 @@ const useStyles = makeStyles({
 
 export default function ListUser() {
   const classes = useStyles();
-  const url = `https://www.breakingbadapi.com/api/characters?limit=10&offset=8`
-  const {loading,data} = useFetch(url)
-  console.log(data)
   const dispatch = useDispatch();
-  const handleView = (id) => {
+  // const url = `https://cartaya.graciadev.com/api/admin/getUsers`
+  // const {loading,data} = useFetch(url)
+  // const {content} = data ;
+  // console.log(content[0])
+  // const users = getUsers()
+  const {data,loading} = useFetchUser()
+  
+  
+  console.log(data)
+ 
+  const handleView = (info) => {
     
-    dispatch(addUsers(id))
+    dispatch(viewUser(info))
     
   }
 
   
   return (
-      
+    // Tabla de la lista de usuarios 
     <TableContainer component={Paper}>
         {(loading )&& <div className="loading" style={{width:'100%'}}> <LinearProgress /></div>}
       <Table className={classes.table} aria-label="customized table">
@@ -70,9 +75,10 @@ export default function ListUser() {
           
             <StyledTableCell>Id</StyledTableCell>
             <StyledTableCell align="right">Nombre</StyledTableCell>
-            <StyledTableCell align="right">nickname</StyledTableCell>
-            <StyledTableCell align="right">category</StyledTableCell>
-            <StyledTableCell align="center">Opcion</StyledTableCell>
+            <StyledTableCell align="center">User</StyledTableCell>
+            <StyledTableCell align="center">Password</StyledTableCell>
+            <StyledTableCell align="right">Direccion</StyledTableCell>
+            <StyledTableCell align="center">Opciones</StyledTableCell>
            
           </TableRow>
          
@@ -84,13 +90,14 @@ export default function ListUser() {
               {
                   (!loading) && 
                   data.map(inf => (
-                    <StyledTableRow key={inf.char_id} className="body__table">
+                    <StyledTableRow key={inf.id} className="body__table">
                     <StyledTableCell component="th" scope="row">
-                      {inf.char_id}
+                      {inf.id}
                     </StyledTableCell>
                     <StyledTableCell align="right">{inf.name}</StyledTableCell>
-                    <StyledTableCell align="right">{inf.nickname}</StyledTableCell>
-                    <StyledTableCell align="right">{inf.category}</StyledTableCell>
+                    <StyledTableCell align="right">{inf.user}</StyledTableCell>
+                    <StyledTableCell align="right">{inf.password}</StyledTableCell>
+                    <StyledTableCell align="right">{inf.address}</StyledTableCell>
                     <StyledTableCell align="center">
                     <Button variant="contained" color="primary" startIcon={<EditIcon />}>Editar</Button>
                     <Button variant="contained" color="secondary" startIcon={<DeleteIcon />}>Eliminar</Button>

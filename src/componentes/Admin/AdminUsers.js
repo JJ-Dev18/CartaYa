@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -21,20 +21,24 @@ import PeopleIcon from '@material-ui/icons/People'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import { loggout } from '../../actions/auth';
-import {useDispatch} from 'react-redux'
-
-import {Button} from '@material-ui/core'
+import { useDispatch } from 'react-redux'
+import { Button } from '@material-ui/core'
 import '../../styles/user.css'
-import addUser from './AddUser';
+import {useSelector} from 'react-redux'
 import AddUser from './AddUser';
 import ListUser from './ListUser';
+import { User } from './User';
+
+//Pagina Principal del administrador despues de logged
+
+
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
   },
   appBar: {
-    
+
     zIndex: theme.zIndex.drawer + 1,
     justifyContent: 'space_around',
     backgroundColor: '#999',
@@ -93,15 +97,17 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
   },
 }));
-export const AdminUsers = ({history}) => {
+export const AdminUsers = ({ history }) => {
 
   const dispatch = useDispatch();
   const classes = useStyles();
-
+  const {info,showUser} = useSelector( state => state.user );
+  console.log(info)
   const theme = useTheme();
-  const [showUser, setShowUser] = useState(false)
-  const [showAdd, setShowAdd] = useState(false)
-  const [open, setOpen] = React.useState(false);
+  const [showUsers, setShowUsers] = useState(false) //Estado para mostrar el componente de la lista de usuarios 
+  const [showAdd, setShowAdd] = useState(false) // Estado para mostrar el componente del formulario para agregar usuarios 
+  
+  const [open, setOpen] = React.useState(false); // Estado para abrir y cerrar  el drawer de admin 
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -112,26 +118,27 @@ export const AdminUsers = ({history}) => {
   };
   const handleLogout = (e) => {
 
-     dispatch(loggout())
-     history.push('/auth')
-     console.log('deslogueado admin')
+    dispatch(loggout())
+    history.push('/auth')
+    console.log('deslogueado admin')
   }
-  
+
   const handleUsuarios = (e) => {
-    
-    setShowUser(!showUser)
+
+    setShowUsers(!showUser)
     setShowAdd(false)
-     
+
   }
   const handleAddUser = (e) => {
-     setShowUser(false)
-     setShowAdd(true)
+    setShowUsers(false)
+    setShowAdd(true)
   }
 
   return (
 
     <div className={classes.root} >
       <CssBaseline />
+      {/* Barra de navegacion Admin  */}
       <AppBar
         id="navBar"
         position="fixed"
@@ -154,9 +161,11 @@ export const AdminUsers = ({history}) => {
           <Typography variant="h6" noWrap>
             Administrador
           </Typography>
-          <div onClick={handleLogout} className="logout"><ExitToAppIcon/> Log out </div>
+          {/* boton de logout  */}
+          <div onClick={handleLogout} className="logout"><ExitToAppIcon /> Log out </div>
         </Toolbar>
       </AppBar>
+      {/* Drawer de los iconos del admin  */}
       <Drawer
         variant="permanent"
         className={clsx(classes.drawer, {
@@ -176,6 +185,7 @@ export const AdminUsers = ({history}) => {
           </IconButton>
         </div>
         <Divider />
+        {/* Iconos del Drawer  */}
         <List>
           {['Usuarios', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
             <ListItem button key={text} onClick={handleUsuarios}>
@@ -184,8 +194,8 @@ export const AdminUsers = ({history}) => {
             </ListItem>
           ))}
         </List>
-         <Divider />
-         <List>
+        <Divider />
+        <List>
           {['All mail', 'Trash', 'Spam'].map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
@@ -193,17 +203,23 @@ export const AdminUsers = ({history}) => {
             </ListItem>
           ))}
         </List>
-        
+
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
+
         {
-          (showUser) && <div><h1>Usuarios <Button onClick={handleAddUser} variant="contained" endIcon={<PersonAddIcon/>}>Agregar</Button></h1>  <ListUser/></div> 
+          // Lista de usuarios 
+          (showUsers) && <div><h1>Usuarios <Button onClick={handleAddUser} variant="contained" endIcon={<PersonAddIcon />}>Agregar</Button></h1>  <ListUser /></div>
         }
         {
+          // formulario para agregar usuarios
           (showAdd) && <AddUser />
         }
-        
+        {
+          (showUser) && <div><h1>Usuario Seleccionado </h1> <User/> </div>
+        }
+
       </main>
     </div>
 

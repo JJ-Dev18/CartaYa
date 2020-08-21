@@ -6,10 +6,10 @@ import { loginAdmin, setErrorAdmin } from '../../actions/auth'
 import {useDispatch,useSelector} from 'react-redux'
 import {Link} from 'react-router-dom'
 import Alert from '@material-ui/lab/Alert';
-import { getUser } from '../../helpers/getUser'
+import { getUser } from '../../helpers/getLogin'
 import { getData } from '../../helpers/getData'
 
-
+//LOGIN ADMIN DESHABILITADO PROVICIONAL 
 
 
 export const LoginAdmin = (({history}) => {

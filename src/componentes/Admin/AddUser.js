@@ -2,6 +2,7 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 
+//Componente con el formulario para agregar usuarios nuevos ( admin)
 const useStyles = makeStyles((theme) => ({
   root: {
     '& .MuiTextField-root': {

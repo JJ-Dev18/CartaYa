@@ -1,13 +1,13 @@
 import React, { useState, useRef } from 'react'
-import '../styles/custom.css'
+import '../../styles/custom.css'
 import {useDispatch} from 'react-redux'
-import { useForm } from '../hooks/useForm'
-import { customs } from '../actions/custom';
-import { loggout } from '../actions/auth';
+import { useForm } from '../../hooks/useForm'
+import { customs } from '../../actions/custom';
+import { loggout } from '../../actions/auth';
 import { Input } from '@material-ui/core'
 import {Button}from '@material-ui/core/';
 
-
+//Componente para personalizar las cartas 
 export const Custom = ({history}) => {
     // const [color, setColor] = useState('#000')
     const dispatch = useDispatch();
@@ -29,33 +29,23 @@ export const Custom = ({history}) => {
 
         setColorS(inp2.current.value)  
     }
+    //Funcino para previsualizar el logo despues de subido por el input 
     const handleInputLogo = () => {
         var preview = document.querySelector('img');
         var file    = document.querySelector('input[type=file]').files[0];
         var reader  = new FileReader();
-      
         reader.onloadend = function () {
           preview.src = reader.result; 
           setLogo(preview.src) 
         }
-       
-      
         if (file) {
           reader.readAsDataURL(file);
-        
-        
         } else {
           preview.src = "";
         }
-        
-        console.log(preview.src)
       }
 
-      const handleLogo = (e) => {
-        const lo = document.querySelector('img');
-
-        console.log(lo)
-      }
+   
     const handleCustom = (e) => {
     e.preventDefault()
     dispatch(customs(colorP,colorS,formValues,logo));
@@ -85,7 +75,7 @@ export const Custom = ({history}) => {
                 <div className="content__logo">
                     <label className="text__input"> Subir Logo</label>
                     <div className="logo">
-                    <img ref={imgLog}  src={logo} className="logo" onChange={handleLogo} alt="logo"></img>
+                    <img ref={imgLog}  src={logo} className="logo" alt="logo"></img>
                     </div>
                     <Input ref={inpLogo} type="file" onChange={handleInputLogo} accept="image/*"/>
                    

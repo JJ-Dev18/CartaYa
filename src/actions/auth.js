@@ -1,6 +1,6 @@
 import { types } from "../types/types";
 
-
+//Acciones de la autenticacion tanto admin como de user 
 
 export const login = (user,password ) => ({
 
@@ -33,7 +33,7 @@ export const logoutAdmin= () =>( {
     
 })
 
-export const setError = (msgError) => ({
+export const setErrorLogin = (msgError) => ({
 
     type: types.LogSetError,
     payload : msgError

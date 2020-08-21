@@ -7,8 +7,8 @@ import {
     
   } from "react-router-dom";
 
-import { Login } from '../componentes/Login';
-import { Register } from '../componentes/Register';
+import { Login } from '../componentes/publics/Login';
+import { Register } from '../componentes/publics/Register';
 
 export const AuthRouter = () => {
     return (

@@ -1,10 +1,14 @@
 import {useState,useEffect,useRef} from 'react'
 
+//Hook personalizado para hacer una peticion a una api sin que haya problema si se desmonta el componente antes de terminar la promesa
+
 export const useFetch = (url) => {
    
     const isMounted = useRef(true)
-    
+   
+
     const [state, setstate] = useState({data: null , loading : true , error:null})
+    
     useEffect(() => {
         
         return () => {

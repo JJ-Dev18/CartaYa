@@ -1,0 +1,24 @@
+
+.content__principal{
+    background: #456;
+    width: 100vh;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+.content__negocio{
+    /* border: 1px solid #6e4; */
+    padding: 10px;
+}
+
+.content__negocio-index{
+    /* border: 1px solid pink; */
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+}
+.title__content{
+    padding: 30px;
+    margin: 0;
+}
