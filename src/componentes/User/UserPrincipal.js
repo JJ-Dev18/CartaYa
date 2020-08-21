@@ -1,6 +1,4 @@
 
-import  '../../styles/userPrincipal.css'
-import {Negocio} from './Negocio'
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -16,8 +14,14 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import FaceIcon from '@material-ui/icons/Face';
 import { useSelector,useDispatch } from 'react-redux';
 import { loggout } from '../../actions/auth';
+import  '../../styles/userPrincipal.css'
+import {Negocio} from './Negocio'
+import BusinessIcon from '@material-ui/icons/Business';
+import MenuBookIcon from '@material-ui/icons/MenuBook';
+import { Route, Link } from 'react-router-dom';
 
 
 
@@ -49,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export const  UserPrincipal = () => {
+export const  UserPrincipal = ({history}) => {
   const classes = useStyles();
   const {info} = useSelector( state => state.user );
   const dispatch = useDispatch();
@@ -58,6 +62,17 @@ export const  UserPrincipal = () => {
   const handleLogout = (e) => {
     dispatch(loggout())
     console.log("deslogueado")
+}
+
+const handleNegocios = (e) => {
+      history.push('/negocios')
+}
+const handlePerfil = (e) => {
+
+}
+
+const handleMenus = (e) => {
+
 }
 
   return (
@@ -80,31 +95,41 @@ export const  UserPrincipal = () => {
         <Toolbar />
         <div className={classes.drawerContainer}>
           <List>
-            {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                <ListItemText primary={text} />
+            
+              <ListItem button key="profile" onClick={handlePerfil}>
+                <ListItemIcon> <FaceIcon/> </ListItemIcon>
+                <ListItemText primary="Perfil" />
               </ListItem>
-            ))}
+              <ListItem button key="negocios" onClick={handleNegocios}>
+                <ListItemIcon> <BusinessIcon/> </ListItemIcon>
+                <ListItemText primary="Negocios" />
+              </ListItem>
+              <ListItem button key="menus" onClick={handleMenus}>
+                <ListItemIcon> <MenuBookIcon/> </ListItemIcon>
+                <ListItemText primary="Menus" />
+              </ListItem>
+           
           </List>
           <Divider />
           <List>
-            {
+            
               <ListItem button key='logout' onClick={handleLogout}>
                 <ListItemIcon> <ExitToAppIcon/> </ListItemIcon>
                 <ListItemText primary='Salir' />
               </ListItem>
-            }
+            
           </List>
         </div>
       </Drawer>
       <main className={classes.content}>
         <Toolbar />
+      
+     
         <h1 className="title__content">Negocios</h1>
         <div className="content__negocio-index">
           <Negocio/>
           <Negocio/>
-        </div>
+        </div> 
         
         
 
