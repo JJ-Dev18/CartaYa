@@ -11,63 +11,14 @@ import { useDispatch } from 'react-redux'
 import { addUsers, setErrorUser } from '../../actions/users'
 
 
-export const Register = () => {
+export const FormularioRegistro = ({
+    handleInputChange,name,email,
+    password,password2,handleRegister,register,
+    handleClose,Alert
+}) => {
 
-    const dispatch = useDispatch();
-    const initialForm = {
-        name: '',
-        email: '',
-        password: '',
-        password2: ''
-    };
-
-
-    const [formValues, handleInputChange] = useForm(initialForm)
-    const [register, setRegister] = useState(false)
-    const { name, email, password, password2 } = formValues;
-
-    // registerUser(name, email, password)
-    const handleRegister = (e) => {
-        e.preventDefault()
-        console.log(name,email)
-        if (password === password2) {
-
-            confirmEmail(email).then(resp => {
-                console.log(resp)
-                if (!resp) {
-                    
-                    registerUser(email, password, name).then(msg => {
-                        console.log(msg)
-                        if (!msg.response) {
-                            dispatch(setErrorUser('Error al registrar con el servidor'))
-                        }
-                        else{
-                            setRegister(true)
-                            dispatch(addUsers(name, email, password))
-                        }
-
-                    })
-            
-                }
-            
-        })
-
-    }
-}
-//ALERTA DE REGISTRO 
-function Alert(props) {
-    return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
-
-const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-        return;
-    }
-
-    setRegister(false);
-};
-
-
+       
+        
 //Componente de registro 
 return (
 

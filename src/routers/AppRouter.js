@@ -15,7 +15,8 @@ import { PublicRouter } from './PublicRoute';
 import { AdminUsers } from '../componentes/Admin/AdminUsers';
 // import { Custom } from '../componentes/User/Custom';
 import { AdminRouter } from './AdminRouter';
-import { UserPrincipal } from '../componentes/User/UserPrincipal';
+import { UserPrincipal } from '../componentes/User/Drawer';
+import {PrincipalUser}  from '../Pages/user/PrincipalUser'
   
 
 export  const AppRouter = () => {
@@ -55,7 +56,7 @@ export  const AppRouter = () => {
             <Switch>
                 <AdminRouter isAdmin={!!rol}  path="/admin" component={ AdminUsers} />
                 <PublicRouter isLoggedIn={logged} path="/auth" component={ AuthRouter}/>
-                <PrivateRouter isLoggedIn={logged} exact path="/" component={ UserPrincipal} />
+                <PrivateRouter isLoggedIn={logged} exact path="/" component={ PrincipalUser} />
                 
                 
                 

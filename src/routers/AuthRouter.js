@@ -6,16 +6,17 @@ import {
     Redirect,
     
   } from "react-router-dom";
+import { Login } from '../Pages/Publico/Login';
+import { Register } from '../Pages/Publico/Register';
 
-import { Login } from '../componentes/publics/Login';
-import { Register } from '../componentes/publics/Register';
+
 
 export const AuthRouter = () => {
     return (
        
             <Switch>
-            <Route exact path="/auth/login" component={Login} />
-            <Route exact path="/auth/register" component={ Register} />
+            <Route exact path="/auth/login" component={ Login} />
+            <Route exact path="/auth/register" component={Register } />
 
             <Redirect to ="/auth/login" />
             </Switch>

@@ -37,7 +37,7 @@
     /* background-repeat: no-repeat; */
     /* background-color: ¿¿; */
     background-size: cover;
-    background-position: -35em ;
+    background-position: -25rem ;
     transition: 1.5s background-position ease;
 }
 .form__login{

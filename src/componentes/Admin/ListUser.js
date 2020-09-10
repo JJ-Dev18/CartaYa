@@ -99,9 +99,9 @@ export default function ListUser() {
                     <StyledTableCell align="right">{inf.password}</StyledTableCell>
                     <StyledTableCell align="right">{inf.address}</StyledTableCell>
                     <StyledTableCell align="center">
-                    <Button variant="contained" color="primary" startIcon={<EditIcon />}>Editar</Button>
-                    <Button variant="contained" color="secondary" startIcon={<DeleteIcon />}>Eliminar</Button>
-                    <Button variant="contained" onClick={()=> handleView(inf)} startIcon={<VisibilityIcon/>} > Ver </Button></StyledTableCell>
+                    <Button variant="contained" color="primary" syze='small' startIcon={<EditIcon />}>Editar</Button>
+                    <Button variant="contained" color="secondary" syze='small' startIcon={<DeleteIcon />}>Eliminar</Button>
+                    <Button variant="contained"  syze='small'  onClick={()=> handleView(inf)} startIcon={<VisibilityIcon/>} > Ver </Button></StyledTableCell>
                     </StyledTableRow>
                   ))
               }
