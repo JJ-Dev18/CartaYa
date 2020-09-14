@@ -38,7 +38,7 @@ export const FormularioLogin = ({handleLogin,user,password,error,msgError,handle
                         />
                     <Button className="btn" type="submit" variant="contained" color="secondary" size="large" > Login</Button>
                     { (error) && <Alert severity="error">{msgError}</Alert>} 
-                   <Link className="text__registro" to="/admin"> Admin </Link>
+                   {/* <Link className="text__registro" to="/admin"> Admin </Link> */}
                     
                      <Link className="text__registro" to="/auth/register">
                          Registrarse</Link>

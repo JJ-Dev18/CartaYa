@@ -3,7 +3,14 @@ import { types } from "../types/types";
 //Acciones de los usuarios ( Admin )
 
 
-
+//Add menu
+export const addMenu = (id) => ({
+    type: types.AddMenu,
+    payload:  id
+        
+   
+    
+})
 
 
 export const viewUser = (info) => ({
@@ -13,7 +20,7 @@ export const viewUser = (info) => ({
 }
 )
 
-
+//Add usuario 
 export const addUsers = (name,email) => ({
 
     
@@ -24,6 +31,10 @@ export const addUsers = (name,email) => ({
     }
 
 })
+
+
+
+// Actiones para cambiar de vista 
 export const viewHome = () =>( {
 
     type: types.viewHome,
@@ -58,7 +69,7 @@ export const viewBusiness = () =>( {
 
     }
 })
-export const viewCards = () =>( {
+export const viewCards = (id) =>( {
 
     type: types.viewMenus,
     payload : {
@@ -66,10 +77,11 @@ export const viewCards = () =>( {
         openProfile: false,
         openBusiness: false,
         openCards : true,
+        id: id,
 
     }
 })
-
+//Acciones para dar error 
 export const setErrorUser = (msgError) => ({
 
     type: types.ErrorUser,

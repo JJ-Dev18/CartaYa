@@ -5,6 +5,7 @@ const initialState = {
     openProfile: false,
     openBusiness : false,
     openCards : false,
+    
 }
 
 export const userReducer = (state = initialState , action) => {
@@ -16,6 +17,13 @@ export const userReducer = (state = initialState , action) => {
                    User : action.payload,
                    addUser: true 
                }
+               case types.AddMenu :  
+                   return{   
+                       
+                       id : action.payload, 
+                       viewMenu : true                 
+                            
+                   }
                case types.UserView :
                    return{
                        ...action.payload,
@@ -28,8 +36,7 @@ export const userReducer = (state = initialState , action) => {
                }
                case types.viewPerfil:
                   return {
-                     ...action.payload,
-                                                   
+                     ...action.payload,                                    
                }
                case types.viewNegocios:
                   return {

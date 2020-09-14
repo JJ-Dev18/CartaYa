@@ -1,14 +1,15 @@
 import React, { useState, useRef } from 'react'
 import '../../styles/custom.css'
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import { useForm } from '../../hooks/useForm'
 import { customs } from '../../actions/custom';
 import { loggout } from '../../actions/auth';
 import { Input } from '@material-ui/core'
 import {Button}from '@material-ui/core/';
+import { AddMenu } from '../../peticiones/Menus/AddMenu';
 
 //Componente para personalizar las cartas 
-export const Custom = ({history}) => {
+export const Custom = React.memo( ({history}) => {
     // const [color, setColor] = useState('#000')
     const dispatch = useDispatch();
     const inp1 = useRef(null)
@@ -18,8 +19,14 @@ export const Custom = ({history}) => {
     const [colorP, setColorP] = useState('#FFFFFF')
     const [colorS, setColorS] = useState('#FFFFFF')
     const [logo, setLogo] = useState("/assets/logo.png")
-    const[formValues,handleInputChange] = useForm('')
+    const[formValues,handleInputChange] = useForm({
+        nombre : "",
+        descripcion: "",
+    })
+    const{nombre,descripcion} = formValues;
    
+    const {id} = useSelector( state => state.user );
+    console.log(id)
    
     const handleColorP = (e) => {
 
@@ -48,14 +55,15 @@ export const Custom = ({history}) => {
    
     const handleCustom = (e) => {
     e.preventDefault()
-    dispatch(customs(colorP,colorS,formValues,logo));
-    history.push('/custom/menu')
+    // dispatch(customs(colorP,colorS,formValues,logo));
+    // history.push('/custom/menu')
     }
-    const handleLogout = (e) => {
-        dispatch(loggout())
-        console.log("deslogueado")
+    const handleAgregarMenu = () => {
+
+        AddMenu(id,nombre,descripcion).then( inf => {
+            console.log(inf)
+        })
     }
-  
     
     return (
         <div className="content__custom">
@@ -87,8 +95,9 @@ export const Custom = ({history}) => {
                      <input 
                      className="input__empresa"
                      type="text" 
-                     name="NombreE" 
-                     placeholder="Nombre de la empresa"
+                     name="nombre" 
+                     value = {nombre}
+                     placeholder="Nombre de la carta"
                      onChange={handleInputChange}></input>
                      
                      </div> 
@@ -103,13 +112,15 @@ export const Custom = ({history}) => {
                      
                      </div> 
                      <div className="content__input ">
-                     <label className="text__input">Direccion</label>
-                     <input 
+                     <label className="text__input">Descripcion</label>
+                     <textarea name="descripcion" value={descripcion}
+                     placeholder="descripcion" onChange={handleInputChange}></textarea>
+                     {/* <input 
                      className="input__empresa"
                      type="text" 
                      name="direccion" 
                      placeholder="Direccion"
-                     onChange={handleInputChange}></input>
+                     onChange={handleInputChange}></input> */}
                      
                      </div> 
 
@@ -117,14 +128,15 @@ export const Custom = ({history}) => {
                      className="btn"
                      variant="contained" 
                      type="submit"
+                     onClick={handleAgregarMenu}
                      color="secondary"
-                     style={{marginTop: '40px'}}>Aceptar</Button>
+                     style={{marginTop: '40px'}}>Agregar</Button>
 
-            </form> <Button className="btn" onClick={handleLogout} color="secondary" variant="contained">Logout</Button>
+            </form> 
            
         </div>
     )
 }
-
+)
 
 

@@ -15,7 +15,7 @@ import { Route, Link } from 'react-router-dom';
 import { NavBar } from '../../componentes/User/NavBar';
 import { DrawerUser } from '../../componentes/User/Drawer';
 import { Hidden, Typography, Box, Grid } from '@material-ui/core';
-import { Negocio } from '../../componentes/User/Negocio';
+import { Negocios } from '../../componentes/User/Negocios';
 import { Home } from '../../componentes/User/Home';
 
 import { getInfoUser } from '../../helpers/getInfoUser';
@@ -23,6 +23,7 @@ import { userReducer } from '../../reducers/userReducer';
 import { Menus } from '../../componentes/User/Menus';
 import { Profile } from '../../componentes/User/Profile';
 import {viewBusiness,viewProfile,viewHome,viewCards} from '../../actions/users'
+import { Custom } from '../../componentes/User/Custom';
 
 
 
@@ -50,9 +51,10 @@ export const PrincipalUser = ({ history }) => {
     const [abrir, setAbrir] = useState(false)
     const [name, setName] = useState(null);
     const classes = useStyles();
-    const {openHome,openProfile,openBusiness,openCards} = useSelector( state => state.user );
+    const {openHome,openProfile,openBusiness,openCards,viewMenu} = useSelector( state => state.user );
     const dispatch = useDispatch();
     
+    console.log(viewMenu)
   
     
   
@@ -122,7 +124,10 @@ export const PrincipalUser = ({ history }) => {
                     (openHome) &&  <Home/>
                 }
                 {
-                    (openBusiness) && <Negocio/>
+                    (openBusiness) && <Negocios/>
+                }
+                {
+                    (viewMenu) && <Custom/>
                 }
                 {
                     (openCards) && <Menus/>

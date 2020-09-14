@@ -21,6 +21,9 @@ export const types ={
      viewNegocios : '[User] business',
      viewMenus: '[User] Cards',
 
+     //User Menu
+     AddMenu : '[User] AddMenu',
+
 
      //errores
      LogSetError : '[User Auth] Set Error',

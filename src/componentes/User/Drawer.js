@@ -15,7 +15,7 @@ import  '../../styles/userPrincipal.css'
 import BusinessIcon from '@material-ui/icons/Business';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import HomeIcon from '@material-ui/icons/Home';
-
+import FastfoodIcon from '@material-ui/icons/Fastfood';
 
 
 const drawerWidth = 240;
@@ -76,6 +76,10 @@ export const  DrawerUser = ({
               <ListItem button key="menus" onClick={handleMenus}>
                 <ListItemIcon> <MenuBookIcon/> </ListItemIcon>
                 <ListItemText primary="Menus" />
+              </ListItem>
+              <ListItem button key="Productos" onClick={handleMenus}>
+                <ListItemIcon> <FastfoodIcon/> </ListItemIcon>
+                <ListItemText primary="Productos" />
               </ListItem>
            
           </List>

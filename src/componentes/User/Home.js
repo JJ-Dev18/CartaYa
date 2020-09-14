@@ -1,26 +1,32 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Grid, FormControl, Input, FormHelperText, InputLabel, Typography, FormLabel, FormGroup, Container, Button } from '@material-ui/core'
 import { useForm } from '../../hooks/useForm'
 import { addNegocio } from '../../peticiones/Negocios/addNegocio'
-import { getNegocios } from '../../peticiones/Negocios/getNegocios'
+import Alert from '@material-ui/lab/Alert';
+import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+
 
 export const Home = () => {
  
-    const [formValues,handleInputChange] = useForm({
+    const [formValues,handleInputChange,reset] = useForm({
         nombre: "",
         facebook : "",
         instagram : "" ,
+        descripcion: "",
     
     })
-     
-    const {nombre,facebook,instagram} = formValues;
+    const [agregado, setagregado] = useState(false)
+    
+    const {nombre,facebook,instagram,descripcion} = formValues;
     const handleAgregarNegocio = () => {
         
-        addNegocio(nombre,facebook,instagram).then(inf => {
+        addNegocio(nombre,facebook,instagram,descripcion).then(inf => {
             console.log(inf)
         })
+        reset();
+        setagregado(true);
     }
-   
+    console.log(nombre)
     return (
         <Container maxWidth="md">
             <Grid container spacing={1}>
@@ -52,11 +58,24 @@ export const Home = () => {
                       <FormHelperText></FormHelperText>
                     </FormControl>
                 </Grid>
+                <Grid item xs={12} md={12}>
+                <FormControl component="fieldset">
+                      
+                      <TextareaAutosize style={{width:'350px'}} aria-label="maximum height" rowsMin={3} placeholder="Descripción" onChange={handleInputChange} name="descripcion" value={descripcion}/>
+                      
+                      <FormHelperText></FormHelperText>
+                    </FormControl>
+                
+                </Grid>
                 <Grid item xs={12} md={6}>
                 <Button variant="contained" color="primary" onClick={handleAgregarNegocio}> Agregar </Button>
                 </Grid>
               
             </Grid>
+            {
+                 (agregado) &&  <Alert severity="success">Se ha agregado el negocio, puede visualizarlo en la pestaña NEGOCIOS</Alert>
+            }
+           
         </Container>
     )
 }

@@ -33,11 +33,13 @@
     width: 100vw;
     height: 100vh;
     flex-direction: column;
+    overflow: hidden;
     background:url('/assets/backgroundPc.jpg') ;
+    /* background-attachment: inherit; */
     /* background-repeat: no-repeat; */
     /* background-color: ¿¿; */
     background-size: cover;
-    background-position: -25rem ;
+    background-position: center;
     transition: 1.5s background-position ease;
 }
 .form__login{
