@@ -46,6 +46,10 @@ export const userReducer = (state = initialState , action) => {
                   return {
                  ...action.payload                                 
                }
+               case types.viewProductos:
+                  return {
+                 ...action.payload                                 
+               }
             case types.LogSetError:
                 return {
                     ...action.payload,

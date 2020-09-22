@@ -24,7 +24,7 @@ export const Register = () => {
  
 
     const [formValues, handleInputChange] = useForm(initialForm)
-  
+    const [register, setRegister] = useState(false)
     const { name, email, password, password2 } = formValues;
 
     // registerUser(name, email, password)
@@ -56,7 +56,7 @@ export const Register = () => {
     }
 }
 //ALERTA DE REGISTRO 
-const [register, setRegister] = useState(false)
+
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
@@ -81,6 +81,7 @@ return (
     handleRegister={handleRegister}
     handleClose={handleClose}
     Alert={Alert}
+    register={register}
     />
 )
 }

@@ -6,6 +6,7 @@ import { AccountCircle } from '@material-ui/icons'
 import PhoneIcon from '@material-ui/icons/Phone';
 import DnsIcon from '@material-ui/icons/Dns';
 import EmailIcon from '@material-ui/icons/Email';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 export const Profile = () => {
 
@@ -33,7 +34,7 @@ export const Profile = () => {
   // }
 
   // const {nombre,apellido,telefono,direccion,mail} = formValues;
-  console.log(state)
+  
   return (
     <Container maxWidth="md" justify="flex-start">
       <Grid container spacing={1}>

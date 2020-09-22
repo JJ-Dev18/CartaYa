@@ -5,7 +5,7 @@ export const useFetchMenus = (id) => {
    
     const isMounted = useRef(true) //referencia a el montaje de el componente que usara el use fetch
     const [state, setState] = useState({
-        data : null,
+        data : [],
         loading: true,
         error:null
     });
@@ -21,7 +21,7 @@ export const useFetchMenus = (id) => {
 
     useEffect(() => {
 
-        setState( {data : null, loading :true , error : null})
+        setState( {data : [], loading :true , error : null})
         getMenus(id).then(info => {
        
           

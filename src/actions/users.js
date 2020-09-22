@@ -55,6 +55,7 @@ export const viewProfile = () =>( {
         openProfile: true,
         openBusiness: false,
         openCards : false,
+        openProductos : false ,
 
     }
 })
@@ -66,6 +67,7 @@ export const viewBusiness = () =>( {
         openProfile: false,
         openBusiness: true,
         openCards : false,
+        openProductos : false ,
 
     }
 })
@@ -77,8 +79,20 @@ export const viewCards = (id) =>( {
         openProfile: false,
         openBusiness: false,
         openCards : true,
+        openProductos : false ,
         id: id,
 
+    }
+})
+export const viewProductos = () => ({
+    type: types.viewProductos,
+    payload : {
+        openHome: false,
+        openProfile: false,
+        openBusiness: false,
+        openCards : false,
+        openProductos : true ,
+    
     }
 })
 //Acciones para dar error 

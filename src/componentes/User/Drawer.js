@@ -16,6 +16,7 @@ import BusinessIcon from '@material-ui/icons/Business';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import HomeIcon from '@material-ui/icons/Home';
 import FastfoodIcon from '@material-ui/icons/Fastfood';
+import { useSelector } from 'react-redux';
 
 
 const drawerWidth = 240;
@@ -33,17 +34,21 @@ const useStyles = makeStyles((theme) => ({
   drawerContainer: {
     overflow: 'auto',
   },
+  selected : {
+    backgroundColor:'#9e9a9a'
+  }
  
 
 }));
 
 export const  DrawerUser = ({
   handlePerfil,handleNegocios,handleMenus,handleLogout,
-  open,onClose,variant,handleInicio
+  open,onClose,variant,handleInicio,handleProductos
 }) => {
   
+  const {openHome,openProfile,openBusiness,openCards,viewMenu,openProductos} = useSelector( state => state.user );
   const classes = useStyles()
-
+ 
   return (
     
       
@@ -61,23 +66,23 @@ export const  DrawerUser = ({
         <div className={classes.drawerContainer}>
           <List>
             
-          <ListItem button key="Inicio" onClick={handleInicio}>
+          <ListItem button key="Inicio" onClick={handleInicio} className={(openHome) && classes.selected} >
                 <ListItemIcon> <HomeIcon/> </ListItemIcon>
                 <ListItemText primary="Inicio" />
               </ListItem>
-              <ListItem button key="profile" onClick={handlePerfil}>
+              <ListItem button key="profile" onClick={handlePerfil} className={(openProfile) && classes.selected}>
                 <ListItemIcon> <FaceIcon/> </ListItemIcon>
                 <ListItemText primary="Perfil" />
               </ListItem>
-              <ListItem button key="negocios" onClick={handleNegocios}>
+              <ListItem button key="negocios" onClick={handleNegocios} className={(openBusiness) && classes.selected}>
                 <ListItemIcon> <BusinessIcon/> </ListItemIcon>
                 <ListItemText primary="Negocios" />
               </ListItem>
-              <ListItem button key="menus" onClick={handleMenus}>
+              <ListItem button key="menus" onClick={handleMenus} className={(openCards) && classes.selected}>
                 <ListItemIcon> <MenuBookIcon/> </ListItemIcon>
                 <ListItemText primary="Menus" />
               </ListItem>
-              <ListItem button key="Productos" onClick={handleMenus}>
+              <ListItem button key="Productos" onClick={handleProductos} className={(openProductos) && classes.selected}>
                 <ListItemIcon> <FastfoodIcon/> </ListItemIcon>
                 <ListItemText primary="Productos" />
               </ListItem>

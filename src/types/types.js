@@ -20,10 +20,14 @@ export const types ={
      viewPerfil : '[User] profile',
      viewNegocios : '[User] business',
      viewMenus: '[User] Cards',
+     viewProductos: '[User] Productos',
 
-     //User Menu
-     AddMenu : '[User] AddMenu',
-
+     //Business
+     AddMenu : '[Business] AddMenu',
+     AddProducto : '[Business] AddProducto',
+     AddCategoria : '[Business] AddCategoria ',
+     SelectBusiness : '[Business] Selected' ,
+     SelectCategory : '[Business] SelectedCategory',
 
      //errores
      LogSetError : '[User Auth] Set Error',

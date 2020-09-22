@@ -1,10 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import { Grid, Typography } from '@material-ui/core';
+import { Button, Grid, Typography } from '@material-ui/core';
 import { useFetchMenus } from '../../hooks/useFetchMenus';
-import { useSelector } from 'react-redux';
-
+import { useDispatch, useSelector } from 'react-redux';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useTheme } from '@material-ui/core/styles';
+import { viewBusiness } from '../../actions/users';
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -34,13 +42,54 @@ const useStyles = makeStyles((theme) => ({
 }));
 export const Menus = () => {
     const classes = useStyles()
-    
-    const {id} = useSelector( state => state.user );
+    const theme = useTheme();
+    const {id,selected} = useSelector( state => state.business );
     const { data , loading } = useFetchMenus(id);
-    console.log(data)
+    const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+    const [open, setOpen] = React.useState(false);
+    const dispatch = useDispatch();
+  
+    const handleAgregarMenus = () => {
+      dispatch(viewBusiness())
+      
+    }
+    const handleClose = () => {
+      setOpen(false);
+    };
+  useEffect(() => {
+     if(!loading) {
+      if(data.length === 0){
+        setOpen(true)
+       }
+     }
+    
+  }, [loading])
+  
+  console.log(id,data)
     return (
         <Grid container >
-         { (!loading) && 
+           <Dialog
+        fullScreen={fullScreen}
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="responsive-dialog-title"
+      >
+        <DialogTitle id="responsive-dialog-title">{"Error en Menus"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            No existe ningun menu, o no ha seleccionado ningun negocio, por favor dirijase a la pestaña negocios y seleccione o agregue un menu.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button autoFocus onClick={handleClose} color="primary">
+            Cerrar
+          </Button>
+          <Button onClick={handleAgregarMenus} color="primary" autoFocus>
+            Agregar
+          </Button>
+        </DialogActions>
+      </Dialog>
+         {  (loading) ?  <CircularProgress /> :
              data.map(inf =>  (
               <Grid item lg={4} key={inf.id}>
               <div className={classes.root}>

@@ -4,10 +4,21 @@ import { useForm } from '../../hooks/useForm'
 import { addNegocio } from '../../peticiones/Negocios/addNegocio'
 import Alert from '@material-ui/lab/Alert';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+import { makeStyles } from '@material-ui/core/styles';
 
+const useStyles = makeStyles((theme) => ({
+    formControl: {
+      margin: theme.spacing(1),
+      minWidth: '100%',
+    },
+    selectEmpty: {
+      marginTop: theme.spacing(2),
+    },
+  }));
 
 export const Home = () => {
  
+    const classes = useStyles()
     const [formValues,handleInputChange,reset] = useForm({
         nombre: "",
         facebook : "",
@@ -31,11 +42,11 @@ export const Home = () => {
         <Container maxWidth="md">
             <Grid container spacing={1}>
                 <Grid item xs={12} lg={12}>
-                <Typography variant="h3" >Ingrese su empresa </Typography>
+                <Typography variant="h4" >Ingrese su empresa </Typography>
                 </Grid>
                 <Grid item xs={12} md={12}>
                      
-                    <FormControl component="fieldset">
+                    <FormControl component="fieldset" className={classes.formControl}>
                       <InputLabel>Nombre</InputLabel>
                       <Input value={nombre} name="nombre" onChange={handleInputChange}></Input>
                       
@@ -43,7 +54,7 @@ export const Home = () => {
                     </FormControl>
                 </Grid>
                 <Grid item xs={12} md={6}>
-                <FormControl component="fieldset">
+                <FormControl component="fieldset" className={classes.formControl}>
                       <InputLabel>Facebook</InputLabel>
                       <Input  value={facebook} name="facebook" onChange={handleInputChange}></Input>
                       
@@ -51,7 +62,7 @@ export const Home = () => {
                     </FormControl>
                 </Grid>
                 <Grid item xs={12} md={6}>
-                <FormControl component="fieldset">
+                <FormControl component="fieldset" className={classes.formControl}>
                       <InputLabel>Instagram</InputLabel>
                       <Input value={instagram} name="instagram" onChange={handleInputChange}></Input>
                       
@@ -59,7 +70,7 @@ export const Home = () => {
                     </FormControl>
                 </Grid>
                 <Grid item xs={12} md={12}>
-                <FormControl component="fieldset">
+                <FormControl component="fieldset" className={classes.formControl}>
                       
                       <TextareaAutosize style={{width:'350px'}} aria-label="maximum height" rowsMin={3} placeholder="Descripción" onChange={handleInputChange} name="descripcion" value={descripcion}/>
                       

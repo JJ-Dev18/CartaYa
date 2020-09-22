@@ -22,3 +22,7 @@
     padding: 30px;
     margin: 0;
 }
+.selected{
+    border-radius: 1px ;
+    background: #9e9a9a;
+}

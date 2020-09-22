@@ -16,7 +16,7 @@ export const Login = ({history}) => {
     const {error,msgError} = useSelector( state => state.auth );
     const [formValue,handleInputChange] = useForm({
 
-        user:'user',
+        user:'sss',
         password:'1234'
     })
     

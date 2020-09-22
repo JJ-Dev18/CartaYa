@@ -22,8 +22,9 @@ import { getInfoUser } from '../../helpers/getInfoUser';
 import { userReducer } from '../../reducers/userReducer';
 import { Menus } from '../../componentes/User/Menus';
 import { Profile } from '../../componentes/User/Profile';
-import {viewBusiness,viewProfile,viewHome,viewCards} from '../../actions/users'
+import {viewBusiness,viewProfile,viewHome,viewCards, viewProductos} from '../../actions/users'
 import { Custom } from '../../componentes/User/Custom';
+import { Productos } from '../../componentes/User/Productos';
 
 
 
@@ -51,7 +52,7 @@ export const PrincipalUser = ({ history }) => {
     const [abrir, setAbrir] = useState(false)
     const [name, setName] = useState(null);
     const classes = useStyles();
-    const {openHome,openProfile,openBusiness,openCards,viewMenu} = useSelector( state => state.user );
+    const {openHome,openProfile,openBusiness,openCards,viewMenu,openProductos} = useSelector( state => state.user );
     const dispatch = useDispatch();
     
     console.log(viewMenu)
@@ -73,17 +74,25 @@ export const PrincipalUser = ({ history }) => {
 
     const handleNegocios = (e) => {
         dispatch(viewBusiness())
+        setAbrir(!abrir)
       
     }
     const handlePerfil = (e) => {
         dispatch(viewProfile())
+        setAbrir(!abrir)
     }
 
     const handleMenus = (e) => {
          dispatch(viewCards())
+         setAbrir(!abrir)
     }
     const handleInicio = (e) => {
         dispatch(viewHome())
+        setAbrir(!abrir)
+    }
+    const handleProductos = () => {
+        dispatch(viewProductos())
+        setAbrir(!abrir)
     }
     const handleDrawer = (e) => {
 
@@ -103,6 +112,7 @@ export const PrincipalUser = ({ history }) => {
                     handleMenus={handleMenus}
                     handleNegocios={handleNegocios}
                     handlePerfil = {handlePerfil}
+                    handleProductos={handleProductos}
                 />
             </Hidden>
             <Hidden smUp>
@@ -115,6 +125,7 @@ export const PrincipalUser = ({ history }) => {
                     handleMenus={handleMenus}
                     handleNegocios={handleNegocios}
                     handlePerfil = {handlePerfil}
+                    handleProductos= {handleProductos}
 
                 />
             </Hidden>
@@ -135,7 +146,9 @@ export const PrincipalUser = ({ history }) => {
                 {
                     (openProfile) && <Profile/>
                 }
-               
+                {
+                     (openProductos) && <Productos/>
+                }
                 {/* <Typography variant="h3" className="title__content">Negocios</Typography>
                 <Grid container>
                     <Grid item xs={12} md={6} lg={3}>

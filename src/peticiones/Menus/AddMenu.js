@@ -1,7 +1,7 @@
 import { DescriptionRounded } from "@material-ui/icons"
 
 
-export const AddMenu = async (id,title,desc) => {
+export const addMenu = async (id,title,desc) => {
 
     const url = `https://cartaya.graciadev.com/api/user/sendCarta?id=0&idNegocio=${id}&title=${title}&description=${desc}`
 

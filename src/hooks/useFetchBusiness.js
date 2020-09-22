@@ -6,7 +6,7 @@ export const useFetchBusiness = () => {
    
     const isMounted = useRef(true) //referencia a el montaje de el componente que usara el use fetch
     const [state, setState] = useState({
-        data : null,
+        data : [],
         loading: true,
         error:null
     });
@@ -22,17 +22,21 @@ export const useFetchBusiness = () => {
 
     useEffect(() => {
 
-        setState( {data : null, loading :true , error : null})
+        setState( {data : [], loading :true , error : null})
         getNegocios().then(info => {
             
           
                 //si el componente se desmonto no realiza la peticion 
             if( isMounted.current){
-                setState({
-                    loading: false,
-                    error: null,
-                    data : info
-                })
+                
+                    setState({
+                        loading: false,
+                        error: null,
+                        data : info
+                    })
+                
+                
+                
             }
            
         });

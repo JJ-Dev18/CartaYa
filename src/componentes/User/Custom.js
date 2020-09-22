@@ -6,7 +6,8 @@ import { customs } from '../../actions/custom';
 import { loggout } from '../../actions/auth';
 import { Input } from '@material-ui/core'
 import {Button}from '@material-ui/core/';
-import { AddMenu } from '../../peticiones/Menus/AddMenu';
+import { addMenu } from '../../peticiones/Menus/addMenu';
+import {  viewCards } from '../../actions/users';
 
 //Componente para personalizar las cartas 
 export const Custom = React.memo( ({history}) => {
@@ -60,8 +61,8 @@ export const Custom = React.memo( ({history}) => {
     }
     const handleAgregarMenu = () => {
 
-        AddMenu(id,nombre,descripcion).then( inf => {
-            console.log(inf)
+        addMenu(id,nombre,descripcion).then( inf => {
+            dispatch(viewCards(id))
         })
     }
     

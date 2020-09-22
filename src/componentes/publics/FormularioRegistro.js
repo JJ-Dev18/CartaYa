@@ -13,11 +13,11 @@ import { addUsers, setErrorUser } from '../../actions/users'
 
 export const FormularioRegistro = ({
     handleInputChange,name,email,
-    password,password2,handleRegister,register,
-    handleClose,Alert
+    password,password2,handleRegister,register,handleClose,Alert
+    
 }) => {
 
-       
+   
         
 //Componente de registro 
 return (
