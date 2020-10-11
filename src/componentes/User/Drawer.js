@@ -48,6 +48,8 @@ export const  DrawerUser = ({
   
   const {openHome,openProfile,openBusiness,openCards,viewMenu,openProductos} = useSelector( state => state.user );
   const classes = useStyles()
+  const {id,selected} = useSelector( state => state.business );
+  
  
   return (
     
@@ -74,11 +76,14 @@ export const  DrawerUser = ({
                 <ListItemIcon> <FaceIcon/> </ListItemIcon>
                 <ListItemText primary="Perfil" />
               </ListItem>
-              <ListItem button key="negocios" onClick={handleNegocios} className={(openBusiness) && classes.selected}>
+              {/* <ListItem button key="negocios" onClick={handleNegocios} className={(openBusiness) && classes.selected}>
                 <ListItemIcon> <BusinessIcon/> </ListItemIcon>
                 <ListItemText primary="Negocios" />
-              </ListItem>
-              <ListItem button key="menus" onClick={handleMenus} className={(openCards) && classes.selected}>
+              </ListItem> */}
+              {
+                (selected) && 
+                <>
+                <ListItem button key="menus" onClick={handleMenus} className={(openCards) && classes.selected}>
                 <ListItemIcon> <MenuBookIcon/> </ListItemIcon>
                 <ListItemText primary="Menus" />
               </ListItem>
@@ -86,7 +91,10 @@ export const  DrawerUser = ({
                 <ListItemIcon> <FastfoodIcon/> </ListItemIcon>
                 <ListItemText primary="Productos" />
               </ListItem>
-           
+           </>
+                
+              }
+              
           </List>
           <Divider />
           <List>

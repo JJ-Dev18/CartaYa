@@ -1,3 +1,4 @@
+import { AccessibilityTwoTone } from "@material-ui/icons";
 import { types } from "../types/types";
 
 
@@ -10,6 +11,11 @@ export const authReducer = (state = { rol:null,logged:false }, action) => {
                 ...action.payload,
                 logged:true
                 
+            }
+            case 'keepSesion' :
+                return {
+                ...action.payload,
+                logged: true,
             }
         case types.loggout:
             return {

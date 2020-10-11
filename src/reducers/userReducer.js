@@ -11,12 +11,7 @@ const initialState = {
 export const userReducer = (state = initialState , action) => {
 
     switch (action.type) {
-           case types.UserAdd :
-               return{
-                   ...action.payload,
-                   User : action.payload,
-                   addUser: true 
-               }
+           
                case types.AddMenu :  
                    return{   
                        

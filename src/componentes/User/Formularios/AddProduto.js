@@ -58,6 +58,7 @@ export const AddProduto = ({handleBack}) => {
         addProducto(id,nombre,descripcion,precioNeto,precio,tipo,idCategory).then(inf => {
            
            setagregado(true)
+           console.log(inf)
         })
         
    }
@@ -167,7 +168,7 @@ export const AddProduto = ({handleBack}) => {
 
     </Grid>
     {
-        (agregado) && <Alert severity="success">Se ha agregado el Producto revise la pestaña productos de nuevo</Alert>
+        (agregado) && <Alert severity="success">Se ha agregado el Producto,seleccione atras para visualizarlo.</Alert>
     }
 
     <Grid container spacing={1} className={classes.formCategoria}>
@@ -200,7 +201,7 @@ export const AddProduto = ({handleBack}) => {
             <Button variant="contained" color="primary" onClick={handleBack}> Atras </Button>
         </Grid>
         {
-        (agregadoCategoria) && <Alert severity="success">Se ha agregado La categoria, entre de nuevo a productos y encontrara la categoria</Alert>
+        (agregadoCategoria) && <Alert severity="success">Se ha agregado La categoria.</Alert>
         }
     </Grid>
     </Container>

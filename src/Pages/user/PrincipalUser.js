@@ -6,7 +6,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Toolbar from '@material-ui/core/Toolbar';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { loggout } from '../../actions/auth';
+import { keepSesion, loggout, login } from '../../actions/auth';
 import '../../styles/userPrincipal.css'
 // import {Negocio} from './Negocio'
 import BusinessIcon from '@material-ui/icons/Business';
@@ -25,6 +25,7 @@ import { Profile } from '../../componentes/User/Profile';
 import {viewBusiness,viewProfile,viewHome,viewCards, viewProductos} from '../../actions/users'
 import { Custom } from '../../componentes/User/Custom';
 import { Productos } from '../../componentes/User/Productos';
+import { businessSelected } from '../../actions/business';
 
 
 
@@ -54,9 +55,11 @@ export const PrincipalUser = ({ history }) => {
     const classes = useStyles();
     const {openHome,openProfile,openBusiness,openCards,viewMenu,openProductos} = useSelector( state => state.user );
     const dispatch = useDispatch();
-    
+   
     console.log(viewMenu)
-  
+    const init = () => {
+      return   JSON.parse(localStorage.getItem('token') )|| []
+    }
     
   
    useEffect(() => {
@@ -66,6 +69,8 @@ export const PrincipalUser = ({ history }) => {
       
        })
    }, [name])
+
+  
     
     const handleLogout = (e) => {
         dispatch(loggout())
@@ -98,11 +103,19 @@ export const PrincipalUser = ({ history }) => {
 
         setAbrir(!abrir)
     }
+    const handleCambiar= () => {
+        dispatch(businessSelected("",false))
+        dispatch(viewHome())
+    }
+    const handleAgregar = () => {
+        dispatch(viewHome())
+      
+      }
 
     return (
         <div className={classes.root}>
             <CssBaseline />
-            <NavBar name={name} handleDrawer={handleDrawer} />
+            <NavBar name={name} handleDrawer={handleDrawer} handleCambiar={handleCambiar}/>
             <Hidden xsDown>
                 <DrawerUser
                     variant="permanent"
@@ -135,7 +148,7 @@ export const PrincipalUser = ({ history }) => {
                     (openHome) &&  <Home/>
                 }
                 {
-                    (openBusiness) && <Negocios/>
+                    (openBusiness) && <Negocios handleAgregar={handleAgregar}/>
                 }
                 {
                     (viewMenu) && <Custom/>

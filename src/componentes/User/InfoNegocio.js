@@ -179,18 +179,7 @@ const handleAgregarProducto = () => {
 
           </FormControl>
         </Grid>
-        <Grid item xs={6} md={3}>
-          <FormControl component="fieldset">
-            <Button variant="contained" color="secondary" onClick={handleAgregarMenu}>Agregar Menu </Button>
-
-          </FormControl>
-        </Grid>
-        <Grid item xs={6} md={3}>
-          <FormControl component="fieldset">
-            <Button variant="contained" color="secondary" onClick={handleAgregarProducto}>Agregar Productos </Button>
-
-          </FormControl>
-        </Grid>
+       
         <Grid item xs={6} md={3}>
           <FormControl component="fieldset">
             <Button variant="contained" color="secondary" onClick={handleChangeBusiness}>Cambiar de empresa </Button>
@@ -205,9 +194,7 @@ const handleAgregarProducto = () => {
       </Grid>
 
       }
-      {
-        (formularioProductos) && <AddProduto handleBack={handleBack}/>
-      }
+      
      
 
     </Container>

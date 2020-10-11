@@ -12,12 +12,15 @@ export const login = (user,password ) => ({
     }
 
 })
-export const loggout = () =>( {
-
-    type : types.loggout
-
+export const keepSesion = () => ({
+    type: keepSesion
 })
-
+export const loggout = () =>{
+    localStorage.removeItem('token')
+    return{
+        type: types.loggout
+    }
+}
 export const loginAdmin = (user,password,rol) =>( {
 
     type: types.loginAdmin,

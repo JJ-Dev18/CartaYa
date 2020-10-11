@@ -35,7 +35,7 @@ export const AddMenu = ({handleBack}) => {
         addMenu(id,nombre,descripcion).then( inf => {
             dispatch(viewCards(id))
         })
-      
+      setagregadoMenu(true)
     }
    
     return (
@@ -71,7 +71,7 @@ export const AddMenu = ({handleBack}) => {
                     <Button variant="contained" color="primary" onClick={handleBack}> Atras</Button>
                 </Grid>
                 {
-                    (agregadoMenu) && <Alert severity="success">Se ha agregado el negocio, puede visualizarlo en la pestaña NEGOCIOS</Alert>
+                    (agregadoMenu) && <Alert severity="success">Se ha agregado el Menu, seleccione atras para visualizarlo</Alert>
             }
             </Grid>
             

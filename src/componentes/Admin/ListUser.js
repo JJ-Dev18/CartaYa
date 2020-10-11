@@ -76,7 +76,7 @@ export default function ListUser() {
             <StyledTableCell>Id</StyledTableCell>
             <StyledTableCell align="right">Nombre</StyledTableCell>
             <StyledTableCell align="center">User</StyledTableCell>
-            <StyledTableCell align="center">Password</StyledTableCell>
+            <StyledTableCell align="center">Apellidos</StyledTableCell>
             <StyledTableCell align="right">Direccion</StyledTableCell>
             <StyledTableCell align="center">Opciones</StyledTableCell>
            
@@ -95,8 +95,8 @@ export default function ListUser() {
                       {inf.id}
                     </StyledTableCell>
                     <StyledTableCell align="right">{inf.name}</StyledTableCell>
-                    <StyledTableCell align="right">{inf.user}</StyledTableCell>
-                    <StyledTableCell align="right">{inf.password}</StyledTableCell>
+                    <StyledTableCell align="right">{inf.lastName}</StyledTableCell>
+                    <StyledTableCell align="right">{inf.name}</StyledTableCell>
                     <StyledTableCell align="right">{inf.address}</StyledTableCell>
                     <StyledTableCell align="center">
                     <Button variant="contained" color="primary" syze='small' startIcon={<EditIcon />}>Editar</Button>

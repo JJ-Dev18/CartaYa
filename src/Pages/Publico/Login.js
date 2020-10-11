@@ -1,8 +1,8 @@
-import React  from 'react'
+import React, { useEffect }   from 'react'
 import {useDispatch,useSelector} from 'react-redux'
 import { Link } from 'react-router-dom'
 import { useForm } from '../../hooks/useForm'
-import { login, loginAdmin, setErrorLogin } from '../../actions/auth'
+import { keepSesion, login, loginAdmin, setErrorLogin } from '../../actions/auth'
 import {Button} from '@material-ui/core/'
 import '../../styles/login.css'
 import Alert from '@material-ui/lab/Alert';
@@ -19,10 +19,18 @@ export const Login = ({history}) => {
         user:'sss',
         password:'1234'
     })
-    
+    const  token = localStorage.getItem('token')
     const{user,password} = formValue;
     
-
+   
+    useEffect(() => {
+    
+        if(token !== []){
+            dispatch(keepSesion())
+            console.log('hay token')
+        }
+       
+     }, [])
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -38,7 +46,7 @@ export const Login = ({history}) => {
                 history.push("/admin") 
                }  
                else{
-                history.push("/custom")
+               
                 dispatch(login(user,password))
                  
                }

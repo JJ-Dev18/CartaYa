@@ -4,7 +4,7 @@ import { useForm } from '../../hooks/useForm'
 import { addNegocio } from '../../peticiones/Negocios/addNegocio'
 import Alert from '@material-ui/lab/Alert';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
-import { makeStyles } from '@material-ui/core/styles';
+
 import { getCategorias } from '../../peticiones/productos/getCategorias';
 import { useFetchCategories } from '../../hooks/useFetchCategories';
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,22 +20,12 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
-import { viewBusiness } from '../../actions/users';
+import { viewBusiness, viewProductos } from '../../actions/users';
 import { AddProduto } from './Formularios/AddProduto';
+import { Producto } from './Producto';
 
-const useStyles = makeStyles((theme) => ({
-    formControl: {
-        margin: theme.spacing(1),
-        minWidth: '100%',
-    },
-    selectEmpty: {
-        marginTop: theme.spacing(2),
-    },
 
-    formCategoria: {
-        marginTop: 100
-    }
-}));
+
 
 export const Productos = () => {
     
@@ -43,88 +33,59 @@ export const Productos = () => {
     const dispatch = useDispatch();
     const [open, setOpen] = React.useState(false);
     const [formularioProductos, setformularioProductos] = useState(false)
-  
+    const [agregarP, setagregarP] = useState(false)
     const { data: productos , loading : loadingP} = useFetchProducts(id,idCategory) ;
     const [categoria, setcategoria] = useState([])
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
-    const classes = useStyles();
+ 
  
   
-    useEffect(() => {
-        if(!loadingP) {
-         if(productos.length === 0){
-           setOpen(true)
-          }
-        }
-       
-     }, [loadingP])
- 
+     const handleBack = ()=>{
+      // setaddMenu(false)
+      setagregarP(false)
+      // dispatch(viewProductos())
+      // setInfo(true)
+   }
     const handleClose = () => {
         setOpen(false);
       };
       const handleAgregarMenus = () => {
-          if(selected){
               setformularioProductos(true)
-              setOpen(false)
-          }
-          else{
-            dispatch(viewBusiness())
-          }
-       
-        
+              setOpen(false)         
       }
+      const handleAgregarProducto = () => {
+               setagregarP(true)
+      } 
+      console.log(agregarP)
     return (
         
-        <Container maxWidth="md">
-                 <Dialog
-        fullScreen={fullScreen}
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="responsive-dialog-title"
-      >
-        <DialogTitle id="responsive-dialog-title">{"Error en negocios"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            {
-                (selected) ? 'No ha agregado ningun producto, por favor agregue un producto' : 'No ha seleccionado ningun  negocio, por favor seleccione uno '
-            }
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button autoFocus onClick={handleClose} color="primary">
-            Cerrar
-          </Button>
-          <Button onClick={handleAgregarMenus} color="primary" autoFocus>
-           { (selected) ? 'Agregar Productos' : 'Seleccionar Empresa'}
-          </Button>
-        </DialogActions>
-      </Dialog>
-         {
-              (loadingP) ?  <CircularProgress /> :
-                productos.map(inf =>  (
-                 <Grid item lg={4} key={inf.id}>
-                 <div className={classes.root}>
-                    
-                     <Paper elevation={3} className={classes.paper} >
-                       <Typography variant="h6" color="initial"> {inf.title}</Typography>
-                       <hr></hr>
-                       <div className={classes.desc}>
-                        <Typography variant="body1"  color="initial" > {inf.description}</Typography>
-                       </div>
-                     </Paper>
-                     
-                  </div>
-                 </Grid>
-   
-                ))
-                
+        <Container spacing={3}>
+           <Typography variant='h3'>Productos</Typography>
+         { 
+             (agregarP) ? <AddProduto handleBack={handleBack}/> :  (loadingP) ?  <CircularProgress /> :
+               
+               <>
+               <Producto id={id} idCategory={idCategory}/> 
+               
+               <Grid item xs={6} md={3}>
+                <FormControl component="fieldset">
+                  <Button variant="contained" color="secondary" onClick={handleAgregarProducto}>Agregar Productos </Button>
+      
+                </FormControl>
+               </Grid>  
+               </>
+               
+               
             }
             {/* {
                 (formularioProductos) && <AddProduto/>
             } */}
          
-           
+        {
+        (formularioProductos) && <AddProduto handleBack={handleBack}/>
+      }
+       
         </Container>
     )
 }
