@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     paper: {
         
         '&:hover': {
-            backgroundColor: 'red',
+            backgroundColor: '#3f51b5',
             cursor : 'pointer'
           },
     },

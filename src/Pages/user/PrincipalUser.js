@@ -26,7 +26,7 @@ import {viewBusiness,viewProfile,viewHome,viewCards, viewProductos} from '../../
 import { Custom } from '../../componentes/User/Custom';
 import { Productos } from '../../componentes/User/Productos';
 import { businessSelected } from '../../actions/business';
-
+import Cookies from 'universal-cookie'
 
 
 
@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const PrincipalUser = ({ history }) => {
     
-   
+    const cookies = new Cookies()
     const [abrir, setAbrir] = useState(false)
     const [name, setName] = useState(null);
     const classes = useStyles();
@@ -74,6 +74,8 @@ export const PrincipalUser = ({ history }) => {
     
     const handleLogout = (e) => {
         dispatch(loggout())
+        
+        cookies.remove('token')
         console.log("deslogueado")
     }
 
@@ -111,7 +113,7 @@ export const PrincipalUser = ({ history }) => {
         dispatch(viewHome())
       
       }
-
+      
     return (
         <div className={classes.root}>
             <CssBaseline />

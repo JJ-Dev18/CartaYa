@@ -4,6 +4,7 @@ export const types ={
 
      //auth
      login : '[Auth] Login' ,
+     KeepLogin : '[Auth] Keep',
      loggout : '[Auth] Logout',
      //admin
      loginAdmin:'[Admin] Login',

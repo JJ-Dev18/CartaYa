@@ -13,10 +13,10 @@ export const login = (user,password ) => ({
 
 })
 export const keepSesion = () => ({
-    type: keepSesion
+    type: types.KeepLogin
 })
 export const loggout = () =>{
-    localStorage.removeItem('token')
+    
     return{
         type: types.loggout
     }

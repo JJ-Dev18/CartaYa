@@ -6,16 +6,25 @@ const containerStyle = {
   width: '100%',
   height: '400px'
 };
-
+ 
 const center = {
   lat: 4.43889,
   lng: -75.23222
 };
-
-export function Maps(props) {
-  // const Marker = props => {
-  //   return <div className="SuperAwesomePin"></div>
-  // }
+ 
+ function Maps() {
+  const [map, setMap] = React.useState(null)
+ 
+  // const onLoad = React.useCallback(function callback(map) {
+  //   const bounds = new window.google.maps.LatLngBounds();
+  //   map.fitBounds(bounds);
+  //   setMap(map)
+  // }, [])
+ 
+  // const onUnmount = React.useCallback(function callback(map) {
+  //   setMap(null)
+  // }, [])
+ 
   return (
     <LoadScript
       googleMapsApiKey="AIzaSyDZAFFlmk0cUK2P107kVmzjANHMlfs6fUY"
@@ -24,6 +33,10 @@ export function Maps(props) {
         mapContainerStyle={containerStyle}
         center={center}
         zoom={10}
+      
+        onClick={(...args) => {
+          console.log("onClick args", args)
+        }}
       >
         { /* Child components, such as markers, info windows, etc. */ }
         <Marker
@@ -33,10 +46,8 @@ export function Maps(props) {
     draggable={true} />
         <></>
       </GoogleMap>
-      
     </LoadScript>
   )
 }
-
-export default React.memo(Maps)
-
+ 
+export default (Maps)
